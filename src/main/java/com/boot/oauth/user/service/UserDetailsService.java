@@ -1,19 +1,13 @@
 package com.boot.oauth.user.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.boot.oauth.user.exception.UserNotActivatedException;
 import com.boot.oauth.user.model.User;
 import com.boot.oauth.user.repository.UserRepository;
 
@@ -34,9 +28,9 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         User userFromDatabase;
         if(lowercaseLogin.contains("@")) {
-//            userFromDatabase = userRepository.findByEmail(lowercaseLogin);
+            userFromDatabase = userRepository.findByEmail(lowercaseLogin);
         } else {
-//            userFromDatabase = userRepository.findByUsernameCaseInsensitive(lowercaseLogin);
+            userFromDatabase = userRepository.findByUsernameCaseInsensitive(lowercaseLogin);
         }
 
         if (userFromDatabase == null) {
@@ -52,7 +46,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 //            grantedAuthorities.add(grantedAuthority);
 //        }
         //TODO
-        return new UserDetails(userFromDatabase.getUsername(), userFromDatabase.getPassword(), "", null);
+        return new org.springframework.security.core.userdetails.User(userFromDatabase.getUsername(), userFromDatabase.getPassword(), null);
 
     }
 

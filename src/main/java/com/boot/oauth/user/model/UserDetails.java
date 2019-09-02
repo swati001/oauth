@@ -1,5 +1,7 @@
 package com.boot.oauth.user.model;
 
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
@@ -29,11 +31,11 @@ public class UserDetails {
     @Size(min = 0, max = 100)
     private String resetPasswordKey;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_authority",
-            joinColumns = @JoinColumn(name = "username"),
-            inverseJoinColumns = @JoinColumn(name = "authority"))
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_authority",
+//            joinColumns = @JoinColumn(name = "username"),
+//            inverseJoinColumns = @JoinColumn(name = "authority"))
     private Set<Authority> authorities;
 
     public String getUsername() {
@@ -99,7 +101,7 @@ public class UserDetails {
 
         User user = (User) o;
 
-        if (!username.equals(user.username)) return false;
+        if (!username.equals(user.getName())) return false;
 
         return true;
     }
