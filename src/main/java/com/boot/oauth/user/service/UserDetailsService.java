@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.boot.oauth.user.exception.UserNotActivatedException;
 import com.boot.oauth.user.model.User;
 import com.boot.oauth.user.repository.UserRepository;
 
@@ -40,17 +41,18 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         if (userFromDatabase == null) {
             throw new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database");
-        } else if (!userFromDatabase.isActivated()) {
-            throw new UserNotActivatedException("User " + lowercaseLogin + " is not activated");
-        }
-
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Authority authority : userFromDatabase.getAuthorities()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getName());
-            grantedAuthorities.add(grantedAuthority);
-        }
-
-        return new org.springframework.security.core.userdetails.User(userFromDatabase.getUsername(), userFromDatabase.getPassword(), grantedAuthorities);
+        } 
+//        else if (!userFromDatabase.isActivated()) {
+//            throw new UserNotActivatedException("User " + lowercaseLogin + " is not activated");
+//        }
+//
+//        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+//        for (Authority authority : userFromDatabase.getAuthorities()) {
+//            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getName());
+//            grantedAuthorities.add(grantedAuthority);
+//        }
+        //TODO
+        return new UserDetails(userFromDatabase.getUsername(), userFromDatabase.getPassword(), "", null);
 
     }
 
