@@ -22,6 +22,7 @@ public class User {
 	@JsonProperty("roles")
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private Collection<String> roles;
+	private boolean activated;
 
 	public User() {
 
@@ -82,6 +83,15 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+
 
 	@Override
 	public String toString() {

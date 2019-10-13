@@ -31,7 +31,7 @@ public class OauthApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (this.userRepository.findByUsername("swati") == null) {
-			User user = new User("Swati", "swati", passwordEncoder.encode("password1"), Arrays.asList("ADMIN"));
+			User user = new User("Swati", "swati", passwordEncoder.encode("password1"), Arrays.asList("ADMIN"), "swati001@gmail.com");
 
 			this.userRepository.save(user);
 		}
