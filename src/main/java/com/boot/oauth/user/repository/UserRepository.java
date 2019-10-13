@@ -12,10 +12,11 @@ public interface UserRepository extends MongoRepository<User, String> {
 
 	User findByUsername(String username);
 	
-//	@Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
-    User findByUsernameCaseInsensitive(@Param("username") String username);
+//	@Query
+//	("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
+//    User findByUsername(@Param("username") String username);
 
-//    @Query
+    @Query
     User findByEmail(String email);
 
 }

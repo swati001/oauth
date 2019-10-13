@@ -16,6 +16,7 @@ public class User {
 	private String id;
 	private String name;
 	private String username;
+	private String email;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	@JsonProperty("roles")
@@ -26,11 +27,12 @@ public class User {
 
 	}
 
-	public User(String name, String username, String password, List<String> roles) {
+	public User(String name, String username, String password, List<String> roles, String email) {
 		this.name = name;
 		this.username = username;
 		this.password = password;
 		this.roles = roles;
+		this.email=email;
 	}
 
 	public String getId() {
@@ -72,10 +74,18 @@ public class User {
 	public void setRoles(Collection<String> roles) {
 		this.roles = roles;
 	}
+	
+	public String geEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", roles="
+		return "User [id=" + id + ", name=" + name + ", email="+ email + ", username=" + username + ", password=" + password + ", roles="
 				+ roles + "]";
 	}
 
